@@ -1,11 +1,9 @@
 const createError = require("http-errors");
 
-const { PrismaClient } = require("@prisma/client");
 const express = require("express");
-const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const appRouter = require("./appRouter");
+const appRouter = require("./routes");
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
@@ -20,7 +18,7 @@ app.get("/", function (req, res, next) {
   res.send("WORKING FINE");
 });
 
-app.use("/appv1", appRouter);
+app.use("/apiv1", appRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -60,5 +58,5 @@ app.use(function (err, req, res, next) {
 });
 
 server.listen(process.env.PORT, "0.0.0.0", function () {
-  console.log("Connected!");
+  console.log("Connected! at PORT ", process.env.PORT);
 });

@@ -16,31 +16,31 @@ datasource db {
 
 
 model User {
-  id      Int      @id @default(autoincrement())
+  id       String       @id @default(uuid())
   email    String   @unique
   password String
   username    String?
- 
+  whiteboards Whiteboard[]
 }
 
 model Whiteboard {
-  id        Int       @id @default(autoincrement())
+  id        String       @id @default(uuid())
   name      String
-  email     String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  // relationship
-  drawings  Drawing[]  @relation("DrawingOnWhiteboard")
+  user      User  @relation(fields: [userId], references: [id])
+  userId    String
+  drawings Drawing[]
 }
 
 model Drawing {
-  id           Int       @id @default(autoincrement())
+  id           String       @id @default(uuid())
   type         String
   data         Json      // JSON representation of the drawing data (e.g., coordinates for lines, shape properties, text content, etc.)
   color        String    // Color of the drawing
   thickness    Int       // Thickness of the drawing
   createdAt    DateTime  @default(now())
   // relationship
-  whiteboard   Whiteboard @relation("DrawingOnWhiteboard", fields: [whiteboardId], references: [id])
-  whiteboardId Int
+  whiteboard   Whiteboard @relation(fields: [whiteboardId], references: [id])
+  whiteboardId String
 }

@@ -10,28 +10,14 @@ const getMyWhiteboards = async (userEmail) => {
 
 const getById = async (id) => {
   return await prisma.whiteboard.findUnique({
-    where: { id: parseInt(id) },
+    where: { id },
   });
 };
 
-const addNewWhiteboard = async (whiteboard) => {
-  try {
-    console.log("wwwwwwwwwwww");
-    return await prisma.whiteboard.create({
-      data: {
-        name: whiteboard.name,
-        updatedAt: whiteboard.updatedAt,
-        // user: {
-        //   connect: {
-        //     id: whiteboard.userId,
-        //   },
-        // },
-        email: whiteboard.email,
-      },
-    });
-  } catch (err) {
-    console.log("Error creating whiteboard:", err);
-  }
+const addNewWhiteboard = async (data) => {
+  return await prisma.whiteboard.create({
+    data,
+  });
 };
 
 module.exports = {
@@ -39,14 +25,3 @@ module.exports = {
   getById,
   addNewWhiteboard,
 };
-
-// const addNewWhiteboard = async (whiteboard) => {
-//   try {
-//     console.log("wwwwwwwwwwww");
-//     return await prisma.whiteboard.create({
-//       data: whiteboard,
-//     });
-//   } catch (err) {
-//     console.log("Error creating whiteboard:", err);
-//   }
-// };

@@ -1,17 +1,20 @@
 const userService = require("../service/user.service");
 
-const getAllUsers = async (req, res) => {
+const getMyWhiteboards = async (req, res, next) => {
   try {
-    const users = await userService.getAll();
-    res.json(users);
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    // next(error) reaches error handling middleware in app.js
-    // handle all necessary errors there or create new object or class for it
-    return next(error);
+    const whiteboards = await userService.getWhiteboards(req.user.id);
+
+    res.status(200).json(whiteboards);
+  } catch (e) {
+    return next(e);
   }
 };
 
+const getMe = (req, res) => {
+  res.status(200).json(req.user);
+};
+
 module.exports = {
-  getAllUsers,
+  getMyWhiteboards,
+  getMe,
 };

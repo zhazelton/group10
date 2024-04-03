@@ -1,15 +1,5 @@
 const whiteBoardService = require("../service/whiteboard.service");
 
-const getMyWhiteboards = async (req, res, next) => {
-  try {
-    const userEmail = req.user.email;
-    const whiteboards = await whiteBoardService.getMyWhiteboards(userEmail);
-    res.status(200).json(whiteboards);
-  } catch (e) {
-    return next(e);
-  }
-};
-
 const getById = async (req, res, next) => {
   try {
     const whiteboardId = req.params.id;
@@ -19,7 +9,6 @@ const getById = async (req, res, next) => {
         err: "Whiteboard not found",
       });
     }
-    console.log("byid", whiteboard);
     res.status(200).json(whiteboard);
   } catch (err) {
     return next(err);
@@ -31,12 +20,11 @@ const addWhiteboard = async (req, res, next) => {
     const whiteboard = {
       name: req.body.name,
       updatedAt: new Date(),
-      email: req.user.email,
-      //   user: {
-      //     connect: { id: req.user.id },
-      //   },
+      user: {
+        connect: { id: req.user.id },
+      },
     };
-    const whiteboards = whiteBoardService.addNewWhiteboard(whiteboard);
+    const whiteboards = await whiteBoardService.addNewWhiteboard(whiteboard);
     res.status(200).json(whiteboards);
   } catch (e) {
     return next(e);
@@ -44,7 +32,6 @@ const addWhiteboard = async (req, res, next) => {
 };
 
 module.exports = {
-  getMyWhiteboards,
   getById,
   addWhiteboard,
 };

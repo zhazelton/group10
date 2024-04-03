@@ -1,19 +1,16 @@
 const router = require("express").Router();
 
-const { PrismaClient } = require("@prisma/client");
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const prisma = new PrismaClient();
+const prisma = require("../configs/db");
 
 router.post("/login", async (req, res) => {
-  console.log("Login");
   try {
-    const { email, password } = req.body;
+    const { email, username, password } = req.body;
 
     // Check if user exists
-    const user = await prisma.user.findUnique({
-      where: { email },
+    const user = await prisma.user.findFirst({
+      where: { OR: [{ username }, { email }] },
     });
 
     if (!user) {
@@ -40,6 +37,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   try {
+    console.log("hello");
     const { username, email, password } = req.body;
 
     const existingUser = await prisma.user.findUnique({
@@ -54,7 +52,7 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
     // Create user
-    const newUser = await prisma.user.create({
+    const { password: userPassword, ...user } = await prisma.user.create({
       data: {
         username,
         email,
@@ -62,7 +60,7 @@ router.post("/register", async (req, res) => {
       },
     });
 
-    res.json(newUser);
+    res.json(user);
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ error: "Internal server error" });

@@ -15,7 +15,7 @@ const isAuthenticated = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWTSECRET); // Replace 'your_secret_key' with your JWT secret key
 
     // Fetch user information from the database based on the decoded user ID or email
-    const user = await prisma.user.findUnique({
+    const { password, ...user } = await prisma.user.findUnique({
       where: {
         id: decoded.userId, // Assuming user ID is stored in the JWT payload
       },
