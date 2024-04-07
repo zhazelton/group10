@@ -5,6 +5,9 @@ Edited:/etc/apache2/sites-enabled$ nano 000-default.conf
 SSLEngine on
 SSLCertificateKeyFile /etc/ssl/private/server.yourdomain.com.key
 SSLCertificateFile /etc/ssl/certs/server.yourdomain.com.crt
+Added two lines below (allows access to app via /whiteboard/ directory and required to allow QrA to use the non-https site)
+ ProxyPass "/whiteboard/" "http://127.0.0.1:8080/"
+        ProxyPassReverse "/whiteboard/" "http://127.0.0.1:8080/"
 
 
 Whiteboard link:
