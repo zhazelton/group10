@@ -33,35 +33,3 @@ function Dashboard({ navigation }: any) {
 
 export default Dashboard;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: "white",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    marginVertical: 10,
-    borderRadius: 10,
-    alignItems: "center",
-    elevation: 3,
-  },
-  fullWidthButton: {
-    width: "100%",
-  },
-  logoutButton: {
-    backgroundColor: "red",
-  },
-  buttonText: {
-    color: "black",
-    fontSize: 18,
-  },
-});
