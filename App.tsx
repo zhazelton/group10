@@ -13,7 +13,6 @@ import {
 import WhiteboardDetails from "./screens/whiteboard/Details";
 import WhiteboardGallery from "./screens/whiteboard/Gallery";
 import WhiteboardEdit from "./screens/whiteboard/Edit";
-import WhiteboardARview from "./screens/whiteboard/ARview";
 import ShareWhiteboard from "./screens/whiteboard/Share";
 
 const Stack = createStackNavigator();
@@ -46,7 +45,6 @@ const Router = () => {
             name="Whiteboard Gallery"
             component={WhiteboardGallery}
           />
-          <Stack.Screen name = "View in AR" component={WhiteboardARview} />
           <Stack.Screen name = "Edit your Whiteboard" component={WhiteboardEdit} />
           <Stack.Screen name = "Share A Whiteboard" component={ShareWhiteboard} />
         </>

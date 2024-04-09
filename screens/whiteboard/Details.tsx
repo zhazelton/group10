@@ -37,7 +37,7 @@ function WhiteboardDetails({ navigation }: any) {
               source={{ uri: "https://via.placeholder.com/350" }}
             />
             <View style={styles.buttonsContainer}>
-              <TouchableOpacity style={styles.button} onPress={ ()=> Linking.openURL('https://ec2-13-58-70-148.us-east-2.compute.amazonaws.com:4444/iframe?http://ec2-13-58-70-148.us-east-2.compute.amazonaws.com:8080/?whiteboardid=' + whiteboardname + '&username=' + username)}>
+              <TouchableOpacity style={styles.button} onPress={ ()=> Linking.openURL('https://ec2-13-58-70-148.us-east-2.compute.amazonaws.com:4444/iframe?https://ec2-13-58-70-148.us-east-2.compute.amazonaws.com/whiteboard/?whiteboardid=' + whiteboardname + '&username=' + username)}>
                 <Text style={styles.buttonText}>View in AR</Text >
               </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleeditin2d}>
