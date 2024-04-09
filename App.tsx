@@ -12,9 +12,9 @@ import {
 } from "./security/authContext/AuthContext";
 import WhiteboardDetails from "./screens/whiteboard/Details";
 import WhiteboardGallery from "./screens/whiteboard/Gallery";
-import WhiteboardEdit from "./screens/whiteboard/Edit"
-import WhiteboardARview from "./screens/whiteboard/ARview"
-import ShareWhiteboard from "./screens/whiteboard/Share"
+import WhiteboardEdit from "./screens/whiteboard/Edit";
+import WhiteboardARview from "./screens/whiteboard/ARview";
+import ShareWhiteboard from "./screens/whiteboard/Share";
 
 const Stack = createStackNavigator();
 

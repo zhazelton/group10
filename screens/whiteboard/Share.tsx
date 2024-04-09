@@ -4,10 +4,12 @@ import SafeArea from "../../components/safeArea/SafeArea";
 import { Component } from 'react';
 import { WebView } from 'react-native-webview';
 
-function WhiteboardEdit({ navigation }: any) {
+function ShareWhiteboard({ navigation }: any) {
+        
+  const user = 'zach'; //update to use auth info
   const name = "Huge Whiteboard";
   const share_output = "Send this link to your friends so you can whiteboard together!"
-  const link = "https://http://ec2-13-58-70-148.us-east-2.compute.amazonaws.com:8080/?whiteboardid=" + username + "&username=guestA";
+  const link = "https://http://ec2-13-58-70-148.us-east-2.compute.amazonaws.com:8080/?whiteboardid=" + user + "&username=guest";
   //need to pass the whiteboard name and username in the url
 
   return (

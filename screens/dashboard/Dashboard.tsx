@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useAuthContext } from "../../security/authContext/AuthContext";
 
 function Dashboard({ navigation }: any) {
-  const user = "Prapti Acharya";
+  const user = "zach";
   const { handleLogout } = useAuthContext();
 
   return (

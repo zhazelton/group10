@@ -6,11 +6,12 @@ import { WebView } from 'react-native-webview';
 
 function WhiteboardEdit({ navigation }: any) {
   const name = "Huge Whiteboard";
-  
+  const user = 'zach'; //update to use auth info
+  const whiteboardname = 'zach' //update to use whiteboard name from database
   //need to pass the whiteboard name and username in the url
   return (
     <SafeArea>
-        <WebView source={{ uri: 'http://ec2-13-58-70-148.us-east-2.compute.amazonaws.com:8080/' }} style={{ flex: 1 }} />
+        <WebView source={{ uri: 'http://ec2-13-58-70-148.us-east-2.compute.amazonaws.com:8080/?whiteboardid=' + whiteboardname + '&username=' + user }} style={{ flex: 1 }} />
     </SafeArea>
   );
 }
