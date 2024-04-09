@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, TextInput, Button } from "react-native-paper";
+import { GET, POST } from "../../adapters/http.adapter";
 import SafeArea from "../../components/safeArea/SafeArea";
 
 const Register = ({ navigation }: any) => {
@@ -9,12 +10,27 @@ const Register = ({ navigation }: any) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
+    try {
+      const response = await POST("/auth/register", {
+        fullname,
+        email,
+        username,
+        password,
+      });
+      navigation.navigate("Home");
+    } catch (err) {
+      console.log(err);
+    }
     // api call with above values
     // either authenticate the user with the provided value using handleLogin like in login page
     // or navigate to Home
-    navigation.navigate("Home");
+    // navigation.navigate("Home");
   };
+
+  useEffect(() => {
+    // validate();
+  }, [fullname, email, username, password]);
 
   return (
     <SafeArea>
@@ -104,4 +120,4 @@ const styles = StyleSheet.create({
   link: {
     color: "blue",
   },
-});
+})

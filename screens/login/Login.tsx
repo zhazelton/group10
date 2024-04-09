@@ -8,7 +8,7 @@ function Login({ navigation }: any) {
   const { handleLogin } = useAuthContext();
 
   // State variables for username and password
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
@@ -19,10 +19,10 @@ function Login({ navigation }: any) {
         <View style={styles.form}>
           <TextInput
             style={styles.textInput}
-            label="Username"
+            label="Email"
             mode="outlined"
-            value={username}
-            onChangeText={setUsername} // Update username state on text input change
+            value={email}
+            onChangeText={setEmail} // Update username state on text input change
           />
           <TextInput
             style={styles.textInput}
@@ -36,7 +36,7 @@ function Login({ navigation }: any) {
           <Button
             mode="contained"
             style={styles.submit}
-            onPress={() => handleLogin(username, password)}
+            onPress={() => handleLogin(email, password)}
           >
             Login
           </Button>
