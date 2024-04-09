@@ -1,9 +1,14 @@
 const prisma = require("../configs/db");
 
-const getMyWhiteboards = async (userEmail) => {
+const getMyWhiteboards = async (userId) => {
   return await prisma.whiteboard.findMany({
     where: {
-      email: userEmail,
+      userId,
+    },
+    select: {
+      id: true,
+      name: true,
+      drawings: false,
     },
   });
 };
@@ -20,8 +25,19 @@ const addNewWhiteboard = async (data) => {
   });
 };
 
+const updateWhiteboard = async (id, data) => {
+  await prisma.whiteboard.update({
+    where: {
+      id,
+    },
+    data,
+  });
+  return true;
+};
+
 module.exports = {
   getMyWhiteboards,
   getById,
   addNewWhiteboard,
+  updateWhiteboard,
 };

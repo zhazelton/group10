@@ -31,16 +31,31 @@ const addWhiteboard = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  try {
+    const whiteboard = {
+      ...(req.body.name ? { name: req.body.name } : {}),
+      ...(req.body.drawings ? { drawings: req.body.drawings } : {}),
+    };
+    await whiteBoardService.updateWhiteboard(req.params.id, whiteboard);
+    res.status(200).json(true);
+  } catch (e) {
+    return next(e);
+  }
+};
+
+const getMyWhiteboards = async (req, res, next) => {
+  try {
+    const whiteboards = await whiteBoardService.getMyWhiteboards(req.user.id);
+    res.status(200).json(whiteboards);
+  } catch (e) {
+    return next(e);
+  }
+};
+
 module.exports = {
   getById,
   addWhiteboard,
+  update,
+  getMyWhiteboards,
 };
-
-// const getMyWhiteboards = async (req, res, next) => {
-//   try {
-//     const whiteboards = await whiteBoardService.getMyWhiteboards(req.user);
-//     res.status(200).json(whiteboards);
-//   } catch (e) {
-//     return next(e);
-//   }
-// };

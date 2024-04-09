@@ -1,4 +1,3 @@
-const drawingService = require("../service/drawing.service");
 
 const addDrawing = async (req, res, next) => {
   console.log("From Drawing");
