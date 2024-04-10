@@ -3,15 +3,20 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, ActivityIndicator } fr
 import SafeArea from "../../components/safeArea/SafeArea";
 import { Component } from 'react';
 import { WebView } from 'react-native-webview';
+import {
+  AuthContextProvider,
+  useAuthContext,
+} from "../../security/authContext/AuthContext";
 
 function WhiteboardEdit({ navigation }: any) {
   const name = "Huge Whiteboard";
-  const user = 'zach'; //update to use auth info
+  //const user = 'zach'; //update to use auth info
+  const user = 'zach';
   const whiteboardname = 'zach' //update to use whiteboard name from database
   //need to pass the whiteboard name and username in the url
   return (
     <SafeArea>
-        <WebView source={{ uri: 'http://ec2-13-58-70-148.us-east-2.compute.amazonaws.com:8080/?whiteboardid=' + whiteboardname + '&username=' + user }} style={{ flex: 1 }} />
+        <WebView source={{ uri: 'http://ec2-13-58-70-148.us-east-2.compute.amazonaws.com:8080/?whiteboardid=' + user + '&username=' + user }} style={{ flex: 1 }} />
     </SafeArea>
   );
 }

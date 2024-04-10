@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, TextInput, Button } from "react-native-paper";
-import { useAuthContext } from "../../security/authContext/AuthContext";
 import SafeArea from "../../components/safeArea/SafeArea";
+import {
+  AuthContextProvider,
+  useAuthContext,
+} from "../../security/authContext/AuthContext";
 
 function Login({ navigation }: any) {
   const { handleLogin } = useAuthContext();

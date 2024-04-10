@@ -4,6 +4,10 @@ import { Avatar, TextInput, Button } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import { Image } from "react-native-elements";
 import SafeArea from "../../components/safeArea/SafeArea";
+import {
+  AuthContextProvider,
+  useAuthContext,
+} from "../../security/authContext/AuthContext";
 
 const CreateWhiteboard = ({ navigation }: any) => {
   const [name, setName] = useState("");

@@ -1,9 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useAuthContext } from "../../security/authContext/AuthContext";
+import {
+  AuthContextProvider,
+  useAuthContext,
+} from "../../security/authContext/AuthContext";
 
 function Dashboard({ navigation }: any) {
-  const user = "zach";
+  const user = useAuthContext.username;
   const { handleLogout } = useAuthContext();
 
   return (
