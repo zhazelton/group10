@@ -4,6 +4,7 @@ import { Avatar, TextInput, Button } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import { Image } from "react-native-elements";
 import SafeArea from "../../components/safeArea/SafeArea";
+import { POST } from "../../adapters/http.adapter";
 
 const CreateWhiteboard = ({ navigation }: any) => {
   const [name, setName] = useState("");
@@ -23,9 +24,23 @@ const CreateWhiteboard = ({ navigation }: any) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     //api call
     //axios.post('/create-whiteboard', {body: {name, notes}})
+    try {
+      const response = await POST(
+        "/whiteboard",
+        { name },
+        true,
+        "application/json"
+      );
+
+      console.log("response wwwwwwwww", response);
+      navigation.navigate("Whiteboard Details");
+    } catch (err) {
+      console.log("Error creating whiteboard", err); //
+    }
+
     navigation.navigate("Whiteboard Details");
   };
 
@@ -50,12 +65,12 @@ const CreateWhiteboard = ({ navigation }: any) => {
             onChangeText={setNotes}
             mode="outlined"
           />
-          <TouchableOpacity style={styles.button} onPress={handleImageUpload}>
+          {/* <TouchableOpacity style={styles.button} onPress={handleImageUpload}>
             <Text style={styles.buttonText}>Insert Image</Text>
           </TouchableOpacity>
           {image && (
             <Image source={{ uri: image }} style={styles.imagePreview} />
-          )}
+          )} */}
           <Button mode="contained" style={styles.submit} onPress={handleSubmit}>
             Create
           </Button>
