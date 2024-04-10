@@ -4,6 +4,7 @@ import { useAuthContext } from "../../security/authContext/AuthContext";
 
 function Dashboard({ navigation }: any) {
   const { user, handleLogout } = useAuthContext();
+  console.log("user>>>>", user);
   // const { handleLogout } = useAuthContext();
 
   return (
@@ -69,4 +70,3 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-

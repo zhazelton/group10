@@ -1,6 +1,6 @@
 import * as SecureStore from "expo-secure-store";
 
-export const setToken = async (token: any) => {
+export const setToken = async (token) => {
   try {
     let hash = await SecureStore.setItemAsync("i_hash", token);
 

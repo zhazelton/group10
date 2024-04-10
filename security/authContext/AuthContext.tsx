@@ -1,12 +1,11 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
-import { GET, POST } from "../../adapters/http.adapter";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+import { POST } from "../../adapters/http.adapter";
 import { setToken } from "../../common/getSetToken";
 
 type AuthContextHandler = {
   user: User | null;
   isLoggedIn: boolean;
-  handleLogin: (email: string, password: string) => void;
+  handleLogin: (username: string, password: string) => void;
   handleLogout: () => void;
 };
 
@@ -31,36 +30,26 @@ export const AuthContextProvider = ({
 
   const handleLogin = useCallback(async (email = "", password = "") => {
     // call API and store based on resposnse
-
-    const response = await POST("/auth/login", {
-      email,
-      password,
-    });
-    console.log("response auth:>> ", response);
-    console.log("response user:>> ", response.user);
-    console.log("response token:>> ", response.token);
-
-    if (response.token) {
-      // const token = response.token;
-      // setUser(response.user);
-
-      await setToken(response.token);
-
-      setIsLoggedIn(true);
-      setUser(response.user);
-    } else {
-      console.error("Token not found in login response:", response);
+    try {
+      const response = await POST("/auth/login", { email, password });
+      console.log("hl response", response);
+      if (response.data.token) {
+        const token = response.data.token;
+        // save the token
+        await setToken(token);
+        setUser(response.data.user);
+        setIsLoggedIn(true);
+      } else {
+        // Authentication failed
+        console.error("Login failed:", response);
+      }
+    } catch (error) {
+      console.error("An error occurred during login:", error);
     }
-
-    // await AsyncStorage.setItem("token", response.token);
-    // await setToken(response.token);
-    // setUser({ token: response.token });
-
-    // console.log("Error sign in", err);
+    setIsLoggedIn(true);
   }, []);
 
   const handleLogout = useCallback(() => {
-    setUser(null);
     setIsLoggedIn(false);
   }, []);
 
