@@ -1,0 +1,31 @@
+Edited:/etc/apache2/sites-enabled$ nano 000-default.conf
+- added 3 lines at bottom
+- change 80 to 443 (line 1)
+- added these 3 lines
+SSLEngine on
+SSLCertificateKeyFile /etc/ssl/private/server.yourdomain.com.key
+SSLCertificateFile /etc/ssl/certs/server.yourdomain.com.crt
+Added two lines below (allows access to app via /whiteboard/ directory and required to allow QrA to use the non-https site)
+ ProxyPass "/whiteboard/" "http://127.0.0.1:8080/"
+        ProxyPassReverse "/whiteboard/" "http://127.0.0.1:8080/"
+
+
+Whiteboard link:
+https://ec2-18-118-133-237.us-east-2.compute.amazonaws.com/whiteboard/?whiteboardid=myNewWhiteboard
+
+AR Whiteboard link:
+https://ec2-18-118-133-237.us-east-2.compute.amazonaws.com:4444/iframe?https://ec2-18-118-133-237.us-east-2.compute.amazonaws.com/whiteboard/?whiteboardid=myNewWhiteboard
+
+Starting services (in this order):
+Apache
+sudo systemctl start apache2
+
+whiteboard
+https://github.com/cracker0dks/whiteboard?tab=readme-ov-file
+cd /home/ubuntu/whiteboard
+sudo docker run -d -p 8080:8080 rofl256/whiteboard
+
+QrA
+https://github.com/jonathanneels/QrA/blob/main/iframe.html
+cd /home/ubuntu/QrA
+node index.js
